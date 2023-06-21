@@ -2,11 +2,11 @@
 
 ## Star Rod Editors
 
-The next time you launch Star Rod, you’ll be prompted to open the Map Editor, Sprite Editor, Mod Manager and several other tools.
+The next time you launch Star Rod, you'll be prompted to open the Map Editor, Sprite Editor, Mod Manager and several other tools.
 
 Use the **Mod Manager** to compile and package your mod. This is required to turn the directories of files in you modding directory into a new ROM.
 
-Use the **Globals Editor** to edit items, badges, images and more. To edit the scripting of items or badges you’ll need to actually write scripts yourself though, this menu cannot be used for that.
+Use the **Globals Editor** to edit items, badges, images and more. To edit the scripting of items or badges you'll need to actually write scripts yourself though, this menu cannot be used for that.
 
 Use the **String Editor** to preview, add, delete or edit ingame text.
 
@@ -31,7 +31,7 @@ Using Windows however causes no known problems with OpenGL.
 
 ## Debug Features
 
-When compiling your mod in the **Mod Manager**, set the `Enable Debug Information` option in the Compile Mod options > Debug menu to display map names and battle IDs at the bottom of the screen. The player’s current position will also be printed.
+When compiling your mod in the **Mod Manager**, set the `Enable Debug Information` option in the Compile Mod options > Debug menu to display map names and battle IDs at the bottom of the screen. The player's current position will also be printed.
 This also enables the debug features, which can be accessed using the D-Pad buttons:
 
 * Dpad-Up toggles turbo speed and makes enemies unable to start combat with Mario on contact.
@@ -49,7 +49,11 @@ However, it is recommended to use external tools to create patch files for your 
 
 ## The Mod Directory Explained
 
-The mod directory created and populated by Star Rod contains several folders you’ll need for creating your romhack. Generally, scripts are modified using patch files, and not by editing the source files of maps and battle scripting. The files in the `src` directories are for quick reference only, instead create patch files in the respective patch directories. `xml` files and images are edited in-place however, instead of writing patch files for them.
+The mod directory created and populated by Star Rod contains several folders you'll need for creating your romhack.
+For some of the files in here you can use the editors provided by Star Rod mentioned above. Scripts, which control how maps and battles behave, have no editor associated with them and have to be edited by hand.
+Those scripts are modified using patch files, and not by editing the source files of maps and battles directly. The files in the `src` directories are for quick reference only, instead create patch files in the respective patch directories. `xml` files and images are edited in-place however, instead of writing patch files for them.
+
+The directories within the mod directory are the following:
 
 ```plain
 /map/src/        Source files of maps scripts and editor map files
@@ -63,6 +67,8 @@ The mod directory created and populated by Star Rod contains several folders you
 /map/temp/       Patched map scripts are placed here during the patching
                  process. Just ignore this directory.
 
+/world/          Scripting for the overworld behavior of partners.
+
 /battle/formation/  Scripting of enemies in battle.
 /battle/item/       Scripting of using items in battle.
 /battle/move/       Scripting of Mario's attacks.
@@ -74,9 +80,7 @@ The mod directory created and populated by Star Rod contains several folders you
 /image/misc/     Edit title and pause screen images here.
 /image/icon/*/   Icon images in color-indexed PNG format.
 
-/sprite/
-/sprite/src/
-/sprite/temp/
+/sprite/         Player and NPC sprites.
 
 /strings/        Edited strings and customs strings are added here.
 
@@ -85,4 +89,8 @@ The mod directory created and populated by Star Rod contains several folders you
 /globals/patch/  Global patch files are placed here.
 
 /out/            Compiled and packaged mods will be placed here.
+
+/mod.cfg         Star Rod's configuration file for handling the mod.
+                 It's not required to manually edit this file, use
+                 Star Rod instead.
 ```
