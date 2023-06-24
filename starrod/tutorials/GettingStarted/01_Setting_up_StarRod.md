@@ -8,6 +8,7 @@
   (a "standard" installation of Java, like JRE, does not suffice!)
 * Star Rod modding tool (current version: 0.5.3)
   -> Download here: <https://drive.google.com/file/d/1OUHnb9T7m_aVm-WJY3mmEgFS_DU0F2je/>
+* A valid Paper Mario 64 US v1.0 ROM (There are a variety of tools you can use to dump a backup from your own cartridge. Please ensure your cartridge matches the required version.)
 
 ## Installation
 
