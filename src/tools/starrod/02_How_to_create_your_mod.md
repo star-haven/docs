@@ -1,14 +1,16 @@
 # How to Create Your Mod
 
-## Star Rod Editors
+## Star Rod Tools
 
 The next time you launch Star Rod, you'll be prompted to open the Map Editor, Sprite Editor, Mod Manager and several other tools.
 
-Use the **Mod Manager** to compile and package your mod. This is required to turn the directories of files in you modding directory into a new ROM.
+<img class="right" src="./img/StarRodToolsMenu.png" alt="Screenshot of the Star Rod Tools menu">
+
+Use the [Mod Manager](./editors/1_StarRod_ModManager.md) to compile and package your mod. This is required to turn the directories of files in you modding directory into a new ROM.
 
 Use the **Globals Editor** to edit items, badges, images and more. To edit the scripting of items or badges you'll need to actually write scripts yourself though, this menu cannot be used for that.
 
-Use the **String Editor** to preview, add, delete or edit ingame text.
+Use the [String Editor](./editors/3_StarRod_StringEditor.md) to preview, add, delete or edit ingame text.
 
 Use the **Level Editor** to modify the way maps and battle maps are organized.
 
@@ -18,7 +20,7 @@ Use the **Sprite Editor** to adjust sprites of characters and items, as well as 
 
 Use the **World Map** Editor to change the world map displayed in the pause menu.
 
-Use the **Themes menu** to change the look of Star Rod itself.
+Use the [Themes menu](./editors/9_StarRod_Themes.md) to change the look of Star Rod itself.
 
 For changing the scripting of maps, battles, badges and more, please see:
 TODO link to yet non-existing guide
@@ -31,7 +33,7 @@ Using Windows however causes no known problems with OpenGL.
 
 ## Debug Features
 
-When compiling your mod in the **Mod Manager**, set the `Enable Debug Information` option in the Compile Mod options > Debug menu to display map names and battle IDs at the bottom of the screen. The player's current position will also be printed.
+When compiling your mod in the [Mod Manager](./editors/1_StarRod_ModManager.md), set the `Enable Debug Information` option in the Compile Mod options > Debug menu to display map names and battle IDs at the bottom of the screen. The player's current position will also be printed.
 This also enables the debug features, which can be accessed using the D-Pad buttons:
 
 * Dpad-Up toggles turbo speed and makes enemies unable to start combat with Mario on contact.
