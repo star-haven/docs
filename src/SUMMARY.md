@@ -14,6 +14,9 @@
       - [Map Editor]()
       - [World Map Editor]()
       - [Star Rod Themes](.//tools/starrod/editors/9_StarRod_Themes.md)
+    - [Tutorials](./tools/starrod/tutorials/index.md)
+      - [Basic Patching](./tools/starrod/tutorials/1_Patching.md)
+      - [Add NPC to Map](./tools/starrod/tutorials/2_NPCS.md)
 - [Merlon](./tools/merlon/00_Introduction.md)
 
 # Modding the game
