@@ -16,7 +16,7 @@
       - [Star Rod Themes](.//tools/starrod/editors/9_StarRod_Themes.md)
     - [Tutorials](./tools/starrod/tutorials/index.md)
       - [Basic Patching](./tools/starrod/tutorials/1_Patching.md)
-      - [Add NPC to Map](./tools/starrod/tutorials/2_NPCS.md)
+      - [Add NPC to Map](./tools/starrod/tutorials/2_NPCs.md)
 
 # Reference
 
