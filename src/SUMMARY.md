@@ -17,6 +17,10 @@
     - [Tutorials](./tools/starrod/tutorials/index.md)
       - [Basic Patching](./tools/starrod/tutorials/1_Patching.md)
       - [Add NPC to Map](./tools/starrod/tutorials/2_NPCs.md)
+- [Decomp](./tools/decomp/intro.md)
+  - [Setup](./tools/decomp/setup.md)
+    - [Setup on Windows](./tools/decomp/setup_windows.md)
+  - [Basics](./tools/decomp/basics.md)
 
 # Reference
 
