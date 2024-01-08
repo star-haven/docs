@@ -5,7 +5,7 @@ The development loop is as follows:
 2. `ninja` to compile
 3. `./run` to run (will automatically run `ninja` if required)
 
-## `splat.yaml`
+## `splat.yaml`
 
 An important part of decomp modding is **specifying where files should be linked**. For our purposes, this means describing where in ROM/RAM source code and assets should go.
 
@@ -55,7 +55,7 @@ asset_stack:
 
 Then place assets for your mod in a new directory `assets/my_mod`.
 
-## MapFS
+### MapFS
 
 Map backgrounds, texture archives, geometry, and collision files live in an asset folder called `mapfs`. These are combined into an archive at build time.
 

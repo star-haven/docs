@@ -1,13 +1,13 @@
 # Setting up decomp
 
-## Requirements
+## Requirements
 
 * A valid Paper Mario US v1.0 ROM (There are a variety of tools you can use to dump a backup from your own cartridge. Please ensure your cartridge matches the required version.)
   * MD5-Checksum (.z64): `a722f8161ff489943191330bf8416496`
   * If you do have a clean NTSC-U ROM, but it is in the .n64 or .v64 format, use the following website to fix your ROM: <https://hack64.net/tools/swapper.php>
 * A UNIX operating system like Linux or macOS. **Windows users should read the [Windows](./setup_windows.md) page.**
 
-## Installation
+## Installation
 
 This guide will walk through setting up [papermario-dx](https://github.com/nanaian/papermario-dx), a fork of [papermario](https://github.com/pmret/papermario) which makes modding easier and provides a better developer experience. If you would prefer to not use dx, simply clone the papermario repository instead.
 
