@@ -9,4 +9,4 @@ You should read them in order, but if you're looking for something specific, you
 | Tutorial                                                             | Summary |
 |----------------------------------------------------------------------|---------|
 | [Basic Patching](./1_Patching.md)                                    | Change the music in the "Mail call!" cutscene |
-| [Add NPC to Map](./2_NPCS.md)                                        | Add Kent C. Koopa to Peach's Castle, First Floor (Day)  |
+| [Add NPC to Map](./2_NPCs.md)                                        | Add Kent C. Koopa to Peach's Castle, First Floor (Day)  |
