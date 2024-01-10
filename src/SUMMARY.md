@@ -21,6 +21,8 @@
   - [Setup](./tools/decomp/setup.md)
     - [Setup on Windows](./tools/decomp/setup_windows.md)
   - [Basics](./tools/decomp/basics.md)
+  - [Improving build time](./tools/decomp/improve-build-time.md)
+  - [Debugging with gdb](./tools/decomp/gdb.md)
 
 # Reference
 
