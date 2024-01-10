@@ -4,6 +4,13 @@
 
 To use gdb, you'll need gdb-multiarch, a gdb server and a gdb client.
 
+## Compile with debug symbols
+
+```
+./configure --debug
+ninja
+```
+
 ## Installing gdb-multiarch
 
 - Ubuntu and derivatives: `sudo apt install -y gdb-multiarch`

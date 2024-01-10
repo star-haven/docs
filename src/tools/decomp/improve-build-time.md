@@ -21,11 +21,7 @@ You can confirm that ccache is working correctly by executing `ccache -s` after 
 
 Building without debug symbols can significantly speed up linking depending on your CPU's single-core performance.
 
-To disable compiling debug symbols:
-
-```
-./configure --no-debug
-```
+Make sure you are **not** using the `--debug` configure flag.
 
 Although the link time is better, this has numerous side effects:
 
