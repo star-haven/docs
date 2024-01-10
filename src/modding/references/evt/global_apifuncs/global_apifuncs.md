@@ -8,3 +8,5 @@ Usage examples:
 
 * `EVT_CALL(DisablePlayerInput, TRUE)` (decomp)
 * `Call DisablePlayerInput (.True)` (Star Rod)
+
+[Generated documentation for all global API functions is available here.](https://papermar.io/docs/script__api_2common_8h.html)
