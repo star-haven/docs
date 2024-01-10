@@ -26,7 +26,7 @@ Make sure the gdb server is running. Then:
 - **VSCode**: Open a C file and press **F5**. [More...](https://github.com/Dragorn421/z64-romhack-tutorials/blob/master/debugging/gdb/vscode.md#running)
 - **Terminal**: Start `gdb-multiarch` and enter `target remote [::1]:9123`. [More...](https://github.com/Dragorn421/z64-romhack-tutorials/blob/master/debugging/gdb/terminal.md#connect-to-the-gdb-server)
 
-## Overlays
+## Overlays
 
 TODO: migrate [overlay support](https://github.com/Dragorn421/z64-romhack-tutorials/blob/master/debugging/gdb/gdb_and_z64_overlays.md) to dx
 

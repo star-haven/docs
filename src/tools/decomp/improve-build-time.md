@@ -11,13 +11,13 @@ ccache is particularly effective at improving build times after header files tha
 - Ubuntu and derivatives: `sudo apt install -y ccache`
 - macOS: `brew install ccache`
 
-### Using ccache
+### Using ccache
 
 If you have ccache available on your PATH, `./configure` will automatically use it.
 
 You can confirm that ccache is working correctly by executing `ccache -s` after a build and inspecting the number of cache hits.
 
-## Build without debug symbols
+## Build without debug symbols
 
 Building without debug symbols can significantly speed up linking depending on your CPU's single-core performance.
 

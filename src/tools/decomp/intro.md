@@ -16,7 +16,7 @@ We recommend using *Visual Studio Code*. When opening the repo, a popup will app
 
 Sprites and textures can be edited in your favorite image editor. Bear in mind that all sprites and most textures use a color-indexed image format with strict limits for the number of colors per image (16 for sprites, 16 or 256 for textures). Many artists prefer using [aseprite](https://www.aseprite.org/) or [libresprite](https://github.com/LibreSprite/LibreSprite) for creating pixel art which can be exported as a color-indexed PNG.
 
-### BGM editor
+### BGM editor
 
 [Mamar](https://mamar.nanaian.town/) lets you create and edit BGM files from MIDI files.
 
