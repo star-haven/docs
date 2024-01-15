@@ -121,7 +121,9 @@ Returns the player's current position.
 
 ----
 
-`GetPlayerTargetYaw`
+`GetPlayerTargetYaw, *FLOAT` (decomp) / `GetPlayerTargetYaw (*FLOAT)` (Star Rod)
+
+Returns the player's current target yaw. Since EVT calls like `PlayerFaceNpc` can make the player turn towards a certain target over several frames, this EVT call can be used to check the goal value of this ongoing turning action.
 
 ----
 
@@ -131,43 +133,66 @@ Disables and reenables the player character's shadow.
 
 ----
 
-`InterpPlayerYaw`
+`InterpPlayerYaw, *FLOAT, *INT` (decomp) / `InterpPlayerYaw (*FLOAT, *INT)` (Star Rod)
+
+Turns the player towards target yaw value FLOAT over INT frames.
 
 ----
 
-`InterruptUsePartner`
+`InterruptUsePartner` (decomp) / `802D2B6C ( )` (Star Rod)
+
+Immediately interrupts any partner overworld ability in progress.
 
 ----
 
-`IsPlayerOnValidFloor`
+`IsPlayerOnValidFloor, *BOOL` (decomp) / `IsPlayerOnValidFloor (*BOOL)` (Star Rod)
+
+Returns whether the player is in contact with valid groud currently.
 
 ----
 
-`PlayerFaceNpc`
+`PlayerFaceNpc, INT_X, INT_Y` (decomp) / `PlayerFaceNpc ( INT_X, INT_Y )` (Star Rod)
+
+Turns the player towards the Npc with ID INT_X and locks the player facing to follow the target for INT_Y frames. This is mostly used with `INT_Y = 0` to just turn the player once.
 
 ----
 
-`PlayerJump`
+`PlayerJump, FLOAT_X, FLOAT_Y, FLOAT_Z, INT` (decomp) / `PlayerJump ( FLOAT_X, FLOAT_Y, FLOAT_Z, INT )` (Star Rod)
+
+Makes the player jump towards target location (FLOAT_X, FLOAT_Y, FLOAT_Z) over INT frames. If INT equals zero, then the player's current movespeed value is used to calculate the duration of the jump.
+This function uses mode 0 of the internal `player_jump` function, which plays a jumping sound, changes the player's animation to a jumping animation fitting the current status (default, holding Watt, 8bit Mario), turns the player towards the jump goal, and checks for collider behavior when landing at the end of the jump.
 
 ----
 
-`PlayerJump1`
+`PlayerJump1, FLOAT_X, FLOAT_Y, FLOAT_Z, INT` (decomp) / `PlayerJump1 ( FLOAT_X, FLOAT_Y, FLOAT_Z, INT )` (Star Rod)
+
+Makes the player jump towards target location (FLOAT_X, FLOAT_Y, FLOAT_Z) over INT frames. If INT is zero, then the player's current movespeed value is used to calculate the duration of the jump.
+This function uses mode 1 of the internal `player_jump` function, which does not play a jumping sound, does not change the player's animation to a jumping animation fitting the current status (default, holding Watt, 8bit Mario), does not turn the player towards the jump goal, and does not check for collider behavior when landing at the end of the jump.
 
 ----
 
-`PlayerJump2`
+`PlayerJump2, FLOAT_X, FLOAT_Y, FLOAT_Z, INT` (decomp) / `PlayerJump2 ( FLOAT_X, FLOAT_Y, FLOAT_Z, INT )` (Star Rod)
+
+Makes the player jump towards target location (FLOAT_X, FLOAT_Y, FLOAT_Z) over INT frames. If INT is zero, then the player's current movespeed value is used to calculate the duration of the jump.
+This function uses mode 2 of the internal `player_jump` function, which does not play a jumping sound, does not change the player's animation to a jumping animation fitting the current status (default, holding Watt, 8bit Mario), does not turn the player towards the jump goal, and checks for collider behavior when landing at the end of the jump.
 
 ----
 
-`PlayerMoveTo`
+`PlayerMoveTo, FLOAT_X, FLOAT_Y, FLOAT_Z` (decomp) / `PlayerMoveTo ( FLOAT_X, FLOAT_Y, FLOAT_Z )` (Star Rod)
+
+Makes the player move towards given X/Y coordinate (FLOAT_X, FLOAT_Y) over FLOAT_Z frames. If FLOAT_Z equals zero, then the player's current movespeed value is used to calculate the duration of the move.
 
 ----
 
-`PlaySoundAtPlayer`
+`PlaySoundAtPlayer, INT_X, INT_Y` (decomp) / `PlaySoundAtPlayer ( INT_X, INT_Y )` (Star Rod)
+
+Plays sound effect with ID INT_X at the player current location, using sound flags INT_Y.
 
 ----
 
-`SetPlayerActionState`
+`SetPlayerActionState, INT` (decomp) / `SetPlayerActionState ( INT )` (Star Rod)
+
+Sets the player's action state to the action state with ID INT.
 
 ----
 
@@ -179,7 +204,9 @@ If the chosen animation is `ANIM_MarioW2_Collapse`, then also shakes the camera 
 
 ----
 
-`SetPlayerAnimationSpeed`
+`SetPlayerAnimationSpeed, FLOAT` (decomp) / `SetPlayerAnimationSpeed ( FLOAT )` (Star Rod)
+
+UNUSED! Sets the player's animation speed to FLOAT (default 1.0).
 
 ----
 
@@ -189,11 +216,15 @@ Sets the player's collision size, colloquially called the hit box.
 
 ----
 
-`SetPlayerFlagBits`
+`SetPlayerFlagBits, INT, BOOL` (decomp) / `SetPlayerFlagBits ( INT BOOL )` (Star Rod)
+
+Sets the player's given flags, represented by flag bits INT, to BOOL.
 
 ----
 
-`SetPlayerImgFXFlags`
+`SetPlayerImgFXFlags INT` (decomp) / `802D286C ( INT )` (Star Rod)
+
+Sets flags represented by INT for the player's ImgFX. Used before calling `UpdatePlayerImgFX`.
 
 ----
 
@@ -209,7 +240,9 @@ Sets the player's position immediately.
 
 ----
 
-`SetPlayerPushVelocity`
+`SetPlayerPushVelocity, FLOAT_X, FLOAT_Y, FLOAT_Z` (decomp) / `SetPlayerPushVelocity ( FLOAT_X FLOAT_Y FLOAT_Z )` (Star Rod)
+
+UNUSED! Sets the player's current push velocity to (FLOAT_X, FLOAT_Y, FLOAT_Z).
 
 ----
 
@@ -219,24 +252,36 @@ Sets the player's grounded movement speed. This automatically reset once the pla
 
 ----
 
-`UpdatePlayerImgFX`
+`UpdatePlayerImgFX, INT_1, INT_2, INT_3, INT_4, INT_5` (decomp) / `802D2520 ( INT_1 INT_2 INT_3 INT_4 INT_5 )` (Star Rod)
+
+Clears the player's ImgFX, then applies parameters INT_2 to INT_5 to chosen special sprite effect INT_1 to cause a new ImgFX. These effects can be a holographic effect, color tinting, changing the alpha, making the player sprite wavy, and more. Used after calling `SetPlayerImgFXFlags`.
 
 ----
 
-`UseEntryHeading`
+`UseEntryHeading, INT_X, INT_Y` (decomp) / `UseEntryHeading ( INT_X, INT_Y )` (Star Rod)
+
+Used internally by the `EnterWalk` group of functions.
 
 ----
 
-`UseExitHeading`
+`UseExitHeading, INT_X, INT_Y` (decomp) / `UseExitHeading ( INT_X, INT_Y )` (Star Rod)
+
+Called before `ExitWalk` to set the player's "walk-off" animation target using a given walk-off length INT_X and entry ID INT_Y. This modifies the calling script's Var1, Var2 and Var3 values for use by `ExitWalk`.
 
 ----
 
-`WaitForPlayerInputEnabled`
+`WaitForPlayerInputEnabled` (decomp) / `WaitForPlayerInputEnabled ( )` (Star Rod)
+
+Stops the current script and loops infinitely until player input is enabled.
 
 ----
 
-`WaitForPlayerMoveToComplete`
+`WaitForPlayerMoveToComplete` (decomp) / `WaitForPlayerMoveToComplete ( )` (Star Rod)
+
+Stops the current script and loops infinitely until the current player move is complete.
 
 ----
 
-`WaitForPlayerTouchingFloor`
+`WaitForPlayerTouchingFloor` (decomp) / `WaitForPlayerTouchingFloor ( )` (Star Rod)
+
+Stops the current script and loops infinitely until player touches any valid floor from above, landing on it.
