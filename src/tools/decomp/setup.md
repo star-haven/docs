@@ -9,11 +9,11 @@
 
 ## Installation
 
-This guide will walk through setting up [papermario-dx](https://github.com/nanaian/papermario-dx), a fork of [papermario](https://github.com/pmret/papermario) which makes modding easier and provides a better developer experience. If you would prefer to not use dx, simply clone the papermario repository instead.
+This guide will walk through setting up [papermario-dx](https://github.com/star-haven/papermario-dx), a fork of [papermario](https://github.com/pmret/papermario) which makes modding easier and provides a better developer experience. If you would prefer to not use dx, simply clone the papermario repository instead.
 
 Clone the repository:
 ```sh
-git clone https://github.com/nanaian/papermario-dx
+git clone https://github.com/star-haven/papermario-dx
 cd papermario-dx
 ```
 
