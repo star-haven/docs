@@ -23,6 +23,9 @@
   - [Basics](./tools/decomp/basics.md)
   - [Improving build time](./tools/decomp/improve-build-time.md)
   - [Debugging with gdb](./tools/decomp/gdb.md)
+  - [Publishing](./tools/decomp/publish.md)
+  - [CI/CD with GH Actions](./tools/decomp/gh-actions.md)
+<!--- [I Use Windows, Get Me Out Of Here!](./tools/nix.md)-->
 
 # Reference
 
