@@ -12,6 +12,7 @@
       - [String Editor](.//tools/starrod/editors/3_StarRod_StringEditor.md)
       - [Level Editor]()
       - [Map Editor]()
+      - [Sprite Editor](.//tools/starrod/editors/6_StarRod_SpriteEditor.md)
       - [World Map Editor]()
       - [Star Rod Themes](.//tools/starrod/editors/9_StarRod_Themes.md)
     - [Tutorials](./tools/starrod/tutorials/index.md)
