@@ -26,6 +26,7 @@
   - [Debugging with gdb](./tools/decomp/gdb.md)
   - [Publishing](./tools/decomp/publish.md)
   - [CI/CD with GH Actions](./tools/decomp/gh-actions.md)
+  - [clangd](./tools/decomp/clangd.md)
 <!--- [I Use Windows, Get Me Out Of Here!](./tools/nix.md)-->
 
 # Reference
