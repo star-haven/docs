@@ -1,4 +1,4 @@
-# Setting up Star Rod and your modding folder
+# Setting up Star Rod Classic and your modding folder
 
 ## Requirements
 

@@ -1,8 +1,8 @@
 # How to Create Your Mod
 
-## Star Rod Tools
+## Star Rod Classic Tools
 
-The next time you launch Star Rod, you'll be prompted to open the Map Editor, Sprite Editor, Mod Manager and several other tools.
+The next time you launch Star Rod Classic, you'll be prompted to open the Map Editor, Sprite Editor, Mod Manager and several other tools.
 
 <img class="right" src="./img/StarRodToolsMenu.png" alt="Screenshot of the Star Rod Tools menu">
 

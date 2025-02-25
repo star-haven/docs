@@ -1,12 +1,14 @@
-# Introduction to Star Rod
+# Introduction to Star Rod Classic
 
-Star Rod is a collection of modding tools for Paper Mario 64 (US version 1.0). These tools allow modders to make sweeping changes to the game, from tweaking and rebalancing existing content to adding multiple chapters worth of new content. Paired with a basic text editor, you will be able to add or edit maps, battles, enemies, badges, items, strings, and more. The tools contain a map editor, sprite/animation editor, image editor, and compiler.
+Star Rod Classic is a collection of modding tools for Paper Mario 64 (US version 1.0). These tools allow modders to make sweeping changes to the game, from tweaking and rebalancing existing content to adding multiple chapters worth of new content. Paired with a basic text editor, you will be able to add or edit maps, battles, enemies, badges, items, strings, and more. The tools contain a map editor, sprite/animation editor, image editor, and compiler.
+
+**Star Rod Classic is legacy software and will only recieve minor updates**. Consider using [Paper Mario DX](../decomp/intro.md) instead, as it receives regular updates and is a more powerful tool. 
 
 ## Recommended Software
 
 ### Text editor
 
-Star Rod effectively dumps many game assets to text files, which you may edit and compile back into a playable ROM. For this reason, a large part of modding Paper Mario will involve editing text files. Context-sensitive color coding and highlighting help reading these files and prevent basic syntax errors.
+Star Rod Classic effectively dumps many game assets to text files, which you may edit and compile back into a playable ROM. For this reason, a large part of modding Paper Mario will involve editing text files. Context-sensitive color coding and highlighting help reading these files and prevent basic syntax errors.
 
 We recommend using either *Notepad++* or *Visual Studio Code*. Notepad++ user-defined language files are provided with Star Rod for script files and string files. For VSCode, install [the Star Rod extension](https://marketplace.visualstudio.com/items?itemName=nanaian.vscode-star-rod).
 
@@ -16,4 +18,4 @@ Sprites and textures can be edited in your favorite image editor and converted t
 
 ### BGM editor
 
-[Mamar](https://mamar.nanaian.town/) lets you create and edit BGM files from MIDI files.
+[Mamar](https://mamar.bates64.com/) lets you create and edit BGM files from MIDI files.

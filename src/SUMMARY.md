@@ -4,7 +4,8 @@
 
 # Paper Mario (N64)
 
-- [Star Rod](./tools/starrod/00_Introduction.md)
+- [Paper Mario DX](./tools/decomp/intro.md)
+- [Star Rod Classic](./tools/starrod/00_Introduction.md)
    - [Setup](./tools/starrod/01_Setting_up_StarRod.md)
    - [Creating a mod](.//tools/starrod/02_How_to_create_your_mod.md)
       - [Mod Manager](.//tools/starrod/editors/1_StarRod_ModManager.md)
@@ -18,16 +19,6 @@
     - [Tutorials](./tools/starrod/tutorials/index.md)
       - [Basic Patching](./tools/starrod/tutorials/1_Patching.md)
       - [Add NPC to Map](./tools/starrod/tutorials/2_NPCs.md)
-- [Decomp](./tools/decomp/intro.md)
-  - [Setup](./tools/decomp/setup.md)
-    - [Setup on Windows](./tools/decomp/setup_windows.md)
-  - [Basics](./tools/decomp/basics.md)
-  - [Improving build time](./tools/decomp/improve-build-time.md)
-  - [Debugging with gdb](./tools/decomp/gdb.md)
-  - [Publishing](./tools/decomp/publish.md)
-  - [CI/CD with GH Actions](./tools/decomp/gh-actions.md)
-  - [clangd](./tools/decomp/clangd.md)
-<!--- [I Use Windows, Get Me Out Of Here!](./tools/nix.md)-->
 
 # Reference
 
