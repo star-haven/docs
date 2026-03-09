@@ -16,9 +16,26 @@
         "type": "github"
       }
     },
+    "papermario-dx": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1772896287,
+        "narHash": "sha256-EyWP7yFDL+c7LcC1rvEtYrDrLVR1TtN2J9dVHHAmodI=",
+        "owner": "bates64",
+        "repo": "papermario-dx",
+        "rev": "a2dddd45cb31c92d90e2c5557eb5cbd0d27c465f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "bates64",
+        "repo": "papermario-dx",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "papermario-dx": "papermario-dx"
       }
     }
   },

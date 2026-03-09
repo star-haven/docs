@@ -1,0 +1,3 @@
+#ifndef SHADING_PROFILES_H
+#define SHADING_PROFILES_H
+#endif

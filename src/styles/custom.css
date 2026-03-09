@@ -1,0 +1,121 @@
+:root {
+    --sl-text-h1: 1.75rem;
+    --sl-text-h2: 1.4rem;
+    --sl-text-h3: 1.15rem;
+    --sl-text-h4: 1rem;
+    --sl-text-h5: 0.9rem;
+    text-wrap: pretty;
+    line-height: 28px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1, "liga" 1;
+    --sl-content-width: 50rem;
+}
+
+.type {
+    color: #f9e2af; /* catppuccin mocha yellow - types */
+}
+
+.function {
+    color: #89b4fa; /* catppuccin mocha blue - functions */
+}
+
+.enum {
+    color: #a6e3a1; /* catppuccin mocha green - enum values */
+}
+
+.macro {
+    color: #fab387; /* catppuccin mocha peach - macros/constants */
+}
+
+.keyword {
+    color: #cba6f7; /* catppuccin mocha mauve - keywords */
+}
+
+:not(pre) > code {
+    border-radius: 6px;
+    padding: 0 0.125em;
+    font-size: inherit;
+}
+
+.intra-doc-link {
+    font-family: var(--sl-font-mono, ui-monospace, monospace);
+}
+
+.enum-value {
+    font-family: var(--sl-font-mono, ui-monospace, monospace);
+    margin-top: var(--sl-content-gap-y);
+    margin-bottom: 0;
+    color: #fab387; /* catppuccin mocha peach - constants */
+}
+
+.enum-value a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.enum-value + p {
+    margin-top: 0.25rem;
+}
+
+.field-def {
+    font-family: var(--sl-font-mono, ui-monospace, monospace);
+}
+
+.field-doc {
+    display: block;
+    margin-top: 0.25rem;
+    margin-left: 2rem;
+    font-family: var(--sl-font, system-ui, sans-serif);
+}
+
+/* Hide markdown headings used only for ToC entries (apiitem has its own heading display) */
+h3:has(+ .api-item),
+h4:has(+ .api-item) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Highlight apiitem/enum-value when its heading is targeted */
+h3:target + .api-item > summary,
+h4:target + .api-item > summary,
+h5.enum-value:target {
+    background-color: color-mix(
+        in srgb,
+        var(--sl-color-accent) 15%,
+        transparent
+    );
+}
+
+@keyframes api-target-fadein {
+    from {
+        background-color: color-mix(
+            in srgb,
+            var(--sl-color-accent) 40%,
+            transparent
+        );
+    }
+    to {
+        background-color: color-mix(
+            in srgb,
+            var(--sl-color-accent) 15%,
+            transparent
+        );
+    }
+}
+
+@media not (prefers-reduced-motion) {
+    h3:target + .api-item > summary,
+    h4:target + .api-item > summary,
+    h5.enum-value:target {
+        animation: 0.65s cubic-bezier(0, 0, 0.1, 1) 0.1s api-target-fadein;
+    }
+}

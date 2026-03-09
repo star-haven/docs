@@ -1,0 +1,87 @@
+---
+interface Props {
+    heading: string;
+    source?: string;
+}
+const { heading: rawHeading, source } = Astro.props;
+const heading = rawHeading
+    .replace(/&#10;/g, "\n")
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, "&");
+---
+
+<details open class="api-item">
+    <summary>
+        <span class="api-item-arrow" aria-hidden="true"></span>
+        <Fragment set:html={heading} />
+        {
+            source && (
+                <a class="api-item-source" href={source}>
+                    source
+                </a>
+            )
+        }
+    </summary>
+    <div class="api-item-content">
+        <slot />
+    </div>
+</details>
+
+<style>
+    .api-item {
+        border-left: 0;
+        padding-left: 0;
+        margin-bottom: 2rem;
+    }
+
+    .api-item > summary {
+        list-style: none;
+        display: flex;
+        align-items: baseline;
+        gap: 0;
+        cursor: default;
+        margin-bottom: 0;
+    }
+
+    .api-item > summary::before {
+        position: relative;
+        top: 4px;
+        opacity: 0.5;
+    }
+
+    .api-item :global(a) {
+        text-decoration: none;
+    }
+
+    .api-item-source {
+        margin-left: auto;
+        font-size: 0.8rem;
+        flex-shrink: 0;
+        font-weight: normal;
+    }
+
+    .api-item > summary :global(.api-sig) {
+        margin: 0;
+        font-size: 1rem;
+        display: inline;
+        font-family: var(--sl-font-mono, ui-monospace, monospace);
+        white-space: pre-wrap;
+        flex: 1;
+    }
+
+    .api-item-content {
+        margin-top: 0.5rem;
+        padding-left: 2rem;
+    }
+</style>
+
+<script>
+    document.querySelectorAll(".api-item > summary").forEach((summary) => {
+        summary.addEventListener("click", (e) => {
+            const target = e.target as HTMLElement;
+            if (target.closest("a")) return;
+            if (target === summary) return;
+            e.preventDefault();
+        });
+    });
+</script>

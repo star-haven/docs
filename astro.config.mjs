@@ -1,9 +1,10 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
-
+import sitemap from "@astrojs/sitemap";
 import markdoc from "@astrojs/markdoc";
 import sidebar from "starlight-auto-sidebar";
 import llmsTxt from "starlight-llms-txt";
+import catppuccin from "@catppuccin/starlight";
 
 export default defineConfig({
   site: "https://docs.starhaven.dev",
@@ -41,8 +42,16 @@ export default defineConfig({
           autogenerate: { directory: "classic" },
         },
       ],
-      plugins: [sidebar()],
+      editLink: {
+        baseUrl: "https://github.com/star-haven/docs/edit/main/",
+      },
+      components: {
+        Footer: "./src/components/Footer.astro",
+      },
+      customCss: ["./src/styles/custom.css"],
+      plugins: [sidebar(), catppuccin({ dark: { flavor: "mocha", accent: "yellow" } })],
     }),
+    sitemap(),
     markdoc({ allowHTML: true }),
     llmsTxt({
       exclude: "develop/classic/**",

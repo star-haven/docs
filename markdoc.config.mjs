@@ -9,6 +9,13 @@ export default defineMarkdocConfig({
     }),
   ],
   tags: {
+    apiitem: {
+      render: component("./src/components/ApiItem.astro"),
+      attributes: {
+        heading: { type: String, required: true },
+        source: { type: String, required: false },
+      },
+    },
     aside: {
       render: component("@astrojs/starlight/components", "Aside"),
       attributes: {

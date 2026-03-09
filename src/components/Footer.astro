@@ -1,0 +1,33 @@
+---
+import Default from '@astrojs/starlight/components/Footer.astro';
+
+const isSplash = Astro.locals.starlightRoute.entry.data.template === 'splash';
+---
+
+<Default {...Astro.props}><slot /></Default>
+
+{isSplash && (
+  <footer class="landing-footer">
+    <p>Not an official Nintendo website. Not approved by or associated with Nintendo. Paper Mario is a trademark of Nintendo.</p>
+    <p>© 2026 Star Haven contributors. Released under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> license.</p>
+  </footer>
+)}
+
+<style>
+  .landing-footer {
+    padding: 2rem;
+    background-color: var(--sl-color-black);
+    border-radius: 0.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--sl-color-gray-3);
+  }
+
+  .landing-footer a {
+    color: var(--sl-color-gray-2);
+  }
+
+  .landing-footer p {
+    margin: 0.25rem 0;
+  }
+</style>

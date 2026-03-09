@@ -2,3 +2,4 @@ node_modules/
 dist/
 .astro/
 /result
+src/content/docs/develop/reference/

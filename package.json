@@ -2,13 +2,16 @@
   "name": "starhaven-docs",
   "type": "module",
   "scripts": {
+    "generate-api": "node scripts/generate-api.mjs",
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "npm run generate-api && astro build",
     "preview": "astro preview"
   },
   "dependencies": {
     "@astrojs/markdoc": "^0.15.10",
+    "@astrojs/sitemap": "^3.7.0",
     "@astrojs/starlight": "^0.37.7",
+    "@catppuccin/starlight": "^1.1.1",
     "astro": "^5.18.0",
     "sharp": "^0.33.0",
     "starlight-auto-sidebar": "^0.1.4",
