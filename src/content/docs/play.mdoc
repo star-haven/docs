@@ -1,0 +1,57 @@
+---
+title: Playing Mods
+next: false
+---
+
+This section of the Star Haven Documentation is for people who want to learn how to play Paper Mario mods.
+
+If you encounter any issues, please ask for help on the [Star Haven Discord](https://discord.gg/pwhSQbH) in the `#setup-help` channel.
+
+{% steps %}
+
+1. **Ensure you have a Paper Mario (USA) ROM in `.z64` format**
+
+    You can dump a ROM from your cartridge using a [cartridge reader](https://dumping.guide/carts/nintendo/n64#methods).
+
+    If your ROM is in `.n64` or `.v64` format, you can convert it to `.z64` format using [the swapper](https://hack64.net/tools/swapper.php).
+
+2. **Download the mod you want to play**
+
+    You can download mods at [starhaven.dev/mods](https://starhaven.dev/mods).
+    It should have the file extension `.bps` or `.ips`.
+
+3. **Patch your ROM with the mod you downloaded**
+
+    <iframe src="https://hack64.net/tools/patcher.php" style="width: 100%; height: 340px; overflow: hidden; padding: 0;" frameborder="0" scrolling="no"></iframe>
+
+4. **Play the patched ROM**
+
+    {% tabs %}
+    {% tabitem label="N64 Console" %}
+    You will need:
+    - A Nintendo 64
+    - A Nintendo 64 controller
+    - An Expansion Pak
+    - A flashcart such as the [SummerCart64](https://summercart64.dev/)
+
+    The process varies between flashcarts, but in general, you will need to:
+    1. Put the patched ROM on the flashcart SD card
+    3. Replace the Jumper Pak with the Expansion Pak
+    4. Insert the flashcart
+    5. Turn on the console
+    6. _Have fun!_
+    {% /tabitem %}
+
+    {% tabitem label="Emulator" %}
+    Load the patched ROM in your favorite emulator.
+
+    We recommend [ares](https://ares-emu.net) as it is the most accurate N64 emulator.
+
+        {% aside type="caution" %}
+        Project64 is not recommended. Earlier versions had a dangerous security flaw that can cause mods to hack your computer.
+        Paper Mario is notoriously difficult to emulate and Project64 is a very innaccurate emulator.
+        {% /aside %}
+    {% /tabitem %}
+    {% /tabs %}
+
+{% /steps %}
