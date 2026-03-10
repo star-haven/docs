@@ -24,10 +24,12 @@ if (!srcRoot) {
 }
 
 const includeDir = join(srcRoot, "include");
-const GITHUB_BASE =
-  "https://github.com/bates64/papermario-dx/blob/main/include";
+const GITHUB_REPO_BASE =
+  "https://github.com/bates64/papermario-dx/blob/main";
+const GITHUB_BASE = `${GITHUB_REPO_BASE}/include`;
 
-const RENDER_UNDOCUMENTED = false;
+const RENDER_UNDOCUMENTED = true;
+const RENDER_UNDOCUMENTED_MACROS = false;
 
 const EXCLUDED_DIRS = ["PR", "nu", "mapfs", "libc"];
 const EXCLUDED_FILES = ["ultra64.h", "types.h"];
@@ -270,6 +272,37 @@ function parseGlobalVarsFromSource(source) {
   return vars;
 }
 
+function buildFuncDefinitionMap(srcRoot) {
+  const map = new Map();
+  function walk(dir) {
+    for (const entry of readdirSync(dir)) {
+      const full = join(dir, entry);
+      if (statSync(full).isDirectory()) {
+        walk(full);
+      } else if (entry.endsWith(".c")) {
+        const content = readFileSync(full, "utf8");
+        const lines = content.split("\n");
+        const relPath = relative(srcRoot, full);
+        for (let i = 0; i < lines.length; i++) {
+          const apiMatch = lines[i].match(/^API_CALLABLE\((\w+)\)/);
+          if (apiMatch) {
+            map.set(apiMatch[1], { file: relPath, line: i + 1 });
+            continue;
+          }
+          const funcMatch = lines[i].match(
+            /^(?:[\w*\s]+\s+\**)(\w+)\s*\([^)]*\)\s*\{/,
+          );
+          if (funcMatch && !map.has(funcMatch[1])) {
+            map.set(funcMatch[1], { file: relPath, line: i + 1 });
+          }
+        }
+      }
+    }
+  }
+  walk(join(srcRoot, "src"));
+  return map;
+}
+
 function escapeHtml(text) {
   return text
     .replace(/&/g, "&amp;")
@@ -345,7 +378,7 @@ function kindToClass(kind) {
   if (kind === "c.enum") return "enum";
   if (kind === "c.macro") return "macro";
   if (kind === "c.struct") return "type";
-  if (kind === "c.typedef") return "type";
+  if (kind === "c.typedef" || kind === "c.typealias") return "type";
   if (kind === "c.enum.case") return "enum";
   return "type";
 }
@@ -523,7 +556,7 @@ function buildFuncSignatureHtml(sym, typeMap, nameMap) {
   return { html, funcName, isEvtApi: false };
 }
 
-function generateMarkdown(header, data, typeMap, nameMap) {
+function generateMarkdown(header, data, typeMap, nameMap, funcDefMap) {
   const { fileDoc, macroDocs, globalVars, topLevel, childrenOf } = data;
 
   if (!RENDER_UNDOCUMENTED) {
@@ -532,6 +565,8 @@ function generateMarkdown(header, data, typeMap, nameMap) {
       let doc = parseDocComment(sym.docComment);
       if (kind === "c.macro" && !doc && macroDocs.has(sym.names?.title))
         doc = "y";
+      if (!RENDER_UNDOCUMENTED_MACROS && kind === "c.macro" && !doc)
+        return false;
       const children = childrenOf.get(sym.identifier?.precise) || [];
       const isEnum = kind === "c.enum";
       if (doc) return true;
@@ -591,6 +626,7 @@ function generateMarkdown(header, data, typeMap, nameMap) {
     });
 
     if (!RENDER_UNDOCUMENTED && !doc && visibleChildren.length === 0) continue;
+    if (!RENDER_UNDOCUMENTED_MACROS && kind === "c.macro" && !doc) continue;
 
     const cssClass = kindToClass(kind);
     let heading;
@@ -642,7 +678,7 @@ function generateMarkdown(header, data, typeMap, nameMap) {
     } else {
       let prefix = "";
       if (kind === "c.struct") prefix = `<span class="keyword">struct</span> `;
-      else if (kind === "c.typedef")
+      else if (kind === "c.typedef" || kind === "c.typealias")
         prefix = `<span class="keyword">typedef</span> `;
       else if (kind === "c.enum") prefix = `<span class="keyword">enum</span> `;
       else if (kind === "c.macro")
@@ -651,9 +687,15 @@ function generateMarkdown(header, data, typeMap, nameMap) {
     }
 
     const headingAttr = heading.replace(/"/g, "&quot;").replace(/\n/g, "&#10;");
-    const line = sym.location?.position?.line;
-    const sourceUrl =
-      line != null ? `${GITHUB_BASE}/${header.rel}#L${line + 1}` : null;
+    const def = kind === "c.func" ? funcDefMap.get(name) : null;
+    let sourceUrl;
+    if (def) {
+      sourceUrl = `${GITHUB_REPO_BASE}/${def.file}#L${def.line}`;
+    } else {
+      const line = sym.location?.position?.line;
+      sourceUrl =
+        line != null ? `${GITHUB_BASE}/${header.rel}#L${line + 1}` : null;
+    }
     const sourceAttr = sourceUrl ? ` source="${sourceUrl}"` : "";
     parts.push(`#### ${escapeForMarkdown(tocName)} {% #${tocName} %}`);
     parts.push("");
@@ -665,7 +707,7 @@ function generateMarkdown(header, data, typeMap, nameMap) {
       parts.push("");
     }
 
-    const isStruct = kind === "c.struct" || kind === "c.typedef";
+    const isStruct = kind === "c.struct" || kind === "c.typedef" || kind === "c.typealias";
     const structFields = isStruct
       ? visibleChildren.filter((c) => {
           if (c.kind?.identifier !== "c.property") return false;
@@ -755,6 +797,8 @@ writeFileSync(join(outDir, "_meta.yml"), "label: Reference\ncollapsed: true\n");
 const headers = globHeaders(includeDir);
 console.log(`Found ${headers.length} headers to process`);
 
+const funcDefMap = buildFuncDefinitionMap(srcRoot);
+
 // First pass: extract API data from all headers and build type map
 const typeMap = new Map(); // preciseIdentifier -> { headerRel, symbolName }
 const nameMap = new Map(); // symbolName -> { url, kind }
@@ -791,7 +835,7 @@ for (const header of headers) {
     continue;
   }
 
-  const md = generateMarkdown(header, data, typeMap, nameMap);
+  const md = generateMarkdown(header, data, typeMap, nameMap, funcDefMap);
   if (!md) {
     skipped++;
     continue;
