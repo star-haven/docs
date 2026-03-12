@@ -45,5 +45,8 @@ export default defineMarkdocConfig({
         label: { type: String, required: true },
       },
     },
+    filetree: {
+      render: component("@astrojs/starlight/components", "FileTree"),
+    },
   },
 });
