@@ -23,10 +23,10 @@ if (!srcRoot) {
   process.exit(1);
 }
 
-const includeDir = join(srcRoot, "include");
+const headerRoot = join(srcRoot, "src");
 const GITHUB_REPO_BASE =
   "https://github.com/bates64/papermario-dx/blob/main";
-const GITHUB_BASE = `${GITHUB_REPO_BASE}/include`;
+const GITHUB_BASE = `${GITHUB_REPO_BASE}/src`;
 
 const RENDER_UNDOCUMENTED = true;
 const RENDER_UNDOCUMENTED_MACROS = false;
@@ -34,6 +34,8 @@ const RENDER_UNDOCUMENTED_MACROS = false;
 const EXCLUDED_DIRS = ["PR", "nu", "mapfs", "libc"];
 const EXCLUDED_FILES = ["ultra64.h", "types.h"];
 const EXCLUDED_PATHS = ["common.h", "common.hpp"];
+// Overlays keep their headers to themselves, as each has its own namespace.
+const OVERLAY_DIRS = ["world/area", "world/partner", "battle/actor"];
 
 function globHeaders(dir, base = "") {
   const results = [];
@@ -41,7 +43,7 @@ function globHeaders(dir, base = "") {
     const full = join(dir, entry);
     const rel = base ? `${base}/${entry}` : entry;
     if (statSync(full).isDirectory()) {
-      if (!EXCLUDED_DIRS.includes(entry)) {
+      if (!EXCLUDED_DIRS.includes(entry) && !OVERLAY_DIRS.includes(rel)) {
         results.push(...globHeaders(full, rel));
       }
     } else if (
@@ -93,7 +95,6 @@ function runClangExtractApi(headerPath) {
     "-include",
     join(stubsDir, "PR/libaudio.h"),
     `-I${stubsDir}`,
-    `-I${includeDir}`,
     `-I${join(srcRoot, "ver/us/build/include")}`,
     `-I${join(srcRoot, "src")}`,
     "-x",
@@ -794,7 +795,7 @@ rmSync(outDir, { recursive: true, force: true });
 mkdirSync(outDir, { recursive: true });
 writeFileSync(join(outDir, "_meta.yml"), "label: Reference\ncollapsed: true\n");
 
-const headers = globHeaders(includeDir);
+const headers = globHeaders(headerRoot);
 console.log(`Found ${headers.length} headers to process`);
 
 const funcDefMap = buildFuncDefinitionMap(srcRoot);
