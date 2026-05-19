@@ -1,0 +1,50 @@
+---
+title: Elemental Attacks
+sidebar:
+  order: 9
+---
+
+These are the elements:
+
+```c
+enum Elements {
+    ELEMENT_END              = 0x00000000,
+    ELEMENT_NORMAL           = 0x00000001,
+    ELEMENT_FIRE             = 0x00000002,
+    ELEMENT_WATER            = 0x00000003,
+    ELEMENT_ICE              = 0x00000004,
+    ELEMENT_MYSTERY          = 0x00000005,
+    ELEMENT_MAGIC            = 0x00000007,
+    ELEMENT_SMASH            = 0x00000008,
+    ELEMENT_JUMP             = 0x00000009,
+    ELEMENT_COSMIC           = 0x0000000A,
+    ELEMENT_BLAST            = 0x0000000B,
+    ELEMENT_SHOCK            = 0x0000000C,
+    ELEMENT_QUAKE            = 0x0000000D,
+    ELEMENT_THROW            = 0x0000000F,
+};
+```
+
+## Making an attack with a elemental DamageType
+
+You set the DAMAGE_TYPE_(insert element here)
+
+```c
+Call(EnemyDamageTarget, ACTOR_SELF, LVarF, (DAMAGE_TYPE_FIRE | DAMAGE_TYPE_NO_CONTACT), 0, 0, 4, BS_FLAGS1_TRIGGER_EVENTS)
+```
+
+## Elemental immunity/weakness
+
+``DefenseTable``s can be used to make an enemy either immune or weak to a certain element:
+
+```c
+s32 DefenseTable[] = {
+    ELEMENT_NORMAL,   0,
+    ELEMENT_FIRE,    99,
+    ELEMENT_WATER,   -2,
+    ELEMENT_ICE,     -2,
+    ELEMENT_END,
+};
+```
+
+The enemy in question would be immune to all Fire elemental attacks but be weak to Water and Ice attacks.
