@@ -28,7 +28,7 @@
             pname = "starhaven-docs";
             version = "0.0.0";
             src = ./.;
-            npmDepsHash = "sha256-oC22xf6IC/2nNIdzTTB0Lb1ACPl7GOM0AWrZjmd6Clc=";
+            npmDepsHash = "sha256-KZr1+XRLdXUXlxakkCuYcjOb2sX4aJz9lmXxxtKAyyo=";
             nativeBuildInputs = [ pkgs.llvmPackages.clang ];
             PAPERMARIO_DX_SRC = papermario-dx;
             installPhase = ''
