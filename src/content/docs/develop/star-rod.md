@@ -1,7 +1,7 @@
 ---
 title: Star Rod
 sidebar:
-  order: 3
+  order: 4
 ---
 
 Star Rod is a suite of tools for editing assets.

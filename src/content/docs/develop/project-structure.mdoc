@@ -33,7 +33,7 @@ For example, the file `assets/us/msg/0C_Chapter1.msg` can be overridden by creat
 You can create the `msg` folder if it doesn't exist.
 
 {% aside type="caution" %}
-You should only **never** create, modify, or delete files in `assets/mod/`.
+You should **only** create, modify, or delete files in `assets/mod/`. **Never** edit `assets/dx/` or `assets/us`.
 {% /aside %}
 
 ## The `src` and `include` folders
@@ -43,10 +43,4 @@ when updating to a new version of DX.
 
 ## The `src/dx/config.h` file
 
-This is where you configure certain mod settings, such as:
-
-- The name of the mod that appears on the title screen
-- Whether to enable the debug menu
-- Which map to load when starting a new game
-
-You don't need to understand C code to use these options - just edit the file.
+This is where you configure mod settings like the [mod name and new game start](/develop/title-screen), the [debug menu](/develop/testing/debug-menu), and more. You don't need to understand C code to use these options — just edit the file.
