@@ -34,7 +34,7 @@ Call(SetGoalToTarget, ACTOR_SELF)
 Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 2, BS_FLAGS1_TRIGGER_EVENTS)
 ```
 
-The sixth argument (`2` here) is the actual damage dealt. The result in `LVar0` tells you what happened:
+The third argument is the damage type flags — use `0` for a normal attack, or combine flags for elemental and special behavior (see [below](#damage-type-flags)). The sixth argument (`2` here) is the actual damage dealt. The result in `LVar0` tells you what happened:
 
 | Result | Meaning |
 |--------|---------|
@@ -94,3 +94,16 @@ EvtScript EVS_TakeTurn = {
 ```
 
 For a jump attack with arc rotation, see `src/battle/actor/gloomba.c`. For a dive attack pattern, see `src/battle/actor/paragoomba.c`.
+
+## Damage type flags
+
+The third argument to `EnemyDamageTarget` is a bitmask of `DAMAGE_TYPE_` flags. Use exactly one **elemental** flag to set the [attack's element](/develop/actors/elemental-damage/), and optionally combine it with **modifier** flags:
+
+| Flag | Effect |
+|------|--------|
+| `DAMAGE_TYPE_NO_CONTACT` | Ranged/projectile attack — won't trigger contact hazards like spikes or Zap Tap. |
+| `DAMAGE_TYPE_IGNORE_DEFENSE` | Bypasses the target's defense stat. |
+| `DAMAGE_TYPE_UNBLOCKABLE` | Cannot be blocked by the player. |
+| `DAMAGE_TYPE_STATUS_ALWAYS_HITS` | Status effects bypass immunity checks. |
+
+Pass `0` for a normal contact attack with no special properties.
