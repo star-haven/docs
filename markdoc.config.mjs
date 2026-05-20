@@ -1,12 +1,18 @@
 import { defineMarkdocConfig, component } from "@astrojs/markdoc/config";
 import shiki from "@astrojs/markdoc/shiki";
+import {
+  symbolAutoLinks,
+  symbolAutoLinkTransformer,
+} from "./scripts/markdoc-symbol-links.mjs";
 
 export default defineMarkdocConfig({
   extends: [
     shiki({
       theme: "catppuccin-mocha",
       wrap: true,
+      transformers: [symbolAutoLinkTransformer()],
     }),
+    symbolAutoLinks(),
   ],
   tags: {
     apiitem: {

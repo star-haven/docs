@@ -824,6 +824,15 @@ for (const header of headers) {
   }
 }
 
+// Write symbol map for auto-linking in docs
+const symbolMapPath = join(projectRoot, "src/data/symbol-map.json");
+mkdirSync(dirname(symbolMapPath), { recursive: true });
+writeFileSync(
+  symbolMapPath,
+  JSON.stringify(Object.fromEntries(nameMap), null, 2),
+);
+console.log(`Wrote symbol map with ${nameMap.size} symbols`);
+
 // Second pass: generate markdown with type links
 let generated = 0;
 let skipped = 0;

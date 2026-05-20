@@ -3,3 +3,4 @@ dist/
 .astro/
 /result
 src/content/docs/develop/reference/
+src/data/symbol-map.json
