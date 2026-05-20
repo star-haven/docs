@@ -827,6 +827,12 @@ for (const header of headers) {
         const params = parseEvtParams(sym.docComment);
         if (params.length > 0) entry.params = params;
       }
+      // Mirror the rendering skip logic so the symbol map only contains
+      // symbols that actually have anchors on the generated pages.
+      const doc = parseDocComment(sym.docComment) || (entry.kind === "c.macro" && data.macroDocs.has(symName));
+      if (!RENDER_UNDOCUMENTED && !doc) continue;
+      if (!RENDER_UNDOCUMENTED_MACROS && entry.kind === "c.macro" && !doc) continue;
+      if (entry.kind === "c.property") continue;
       nameMap.set(symName, entry);
     }
   }

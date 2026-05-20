@@ -148,7 +148,11 @@ function addHintsToLine(children, startIdx, params, commaCount, hintFirst) {
                 properties: { ...span.properties },
                 children: [{ type: "text", value: leadingWs[0] }],
               };
-              textNode.value = " " + text.slice(leadingWs[0].length);
+              // Strip the leading whitespace from the text node, keeping
+              // only its own remaining content (not the full span text,
+              // which may include text from child <a> elements).
+              const nodeRemainder = textNode.value.slice(leadingWs[0].length);
+              textNode.value = nodeRemainder ? " " + nodeRemainder : " ";
               children.splice(j, 0, wsSpan);
               // hint goes after the whitespace span (at j+1)
               inserts.push({ index: j + 1, paramName: params[paramIndex] });
