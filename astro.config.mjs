@@ -49,6 +49,29 @@ export default defineConfig({
         Footer: "./src/components/Footer.astro",
       },
       customCss: ["./src/styles/custom.css"],
+      head: [
+        {
+          tag: "script",
+          content: `
+            document.addEventListener('copy', (e) => {
+              const sel = window.getSelection();
+              if (!sel.rangeCount) return;
+              const anchor = sel.anchorNode?.nodeType === 3 ? sel.anchorNode.parentElement : sel.anchorNode;
+              if (!anchor?.closest('pre')) return;
+              const parts = [];
+              for (let i = 0; i < sel.rangeCount; i++) {
+                const frag = sel.getRangeAt(i).cloneContents();
+                frag.querySelectorAll('.inlay-hint').forEach(h => h.remove());
+                parts.push(frag.textContent);
+              }
+              const text = parts.join('');
+              if (!text) return;
+              e.clipboardData.setData('text/plain', text);
+              e.preventDefault();
+            });
+          `,
+        },
+      ],
       plugins: [sidebar(), catppuccin({ dark: { flavor: "mocha", accent: "yellow" } })],
     }),
     sitemap(),

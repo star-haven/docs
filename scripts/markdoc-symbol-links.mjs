@@ -52,29 +52,65 @@ export function symbolAutoLinkTransformer() {
       const textNode = hast.children?.[0];
       if (!textNode || textNode.type !== "text") return;
       const text = textNode.value;
+
+      // Exact match (single-token span)
       const entry = symbolMap[text];
-      if (!entry) return;
-      hast.children = [
-        {
-          type: "element",
-          tagName: "a",
-          properties: { href: entry.url, class: "symbol-link" },
-          children: [{ type: "text", value: text }],
-        },
-      ];
+      if (entry) {
+        hast.children = [
+          {
+            type: "element",
+            tagName: "a",
+            properties: { href: entry.url, class: "symbol-link" },
+            children: [{ type: "text", value: text }],
+          },
+        ];
+        return;
+      }
+
+      // Shiki may merge multiple identifiers into one span (same colour).
+      // Scan for symbol names separated by word boundaries.
+      const parts = [];
+      let remaining = text;
+      while (remaining.length > 0) {
+        const match = remaining.match(/\b(\w+)\b/);
+        if (!match) {
+          parts.push({ type: "text", value: remaining });
+          break;
+        }
+        const word = match[1];
+        const idx = match.index;
+        if (idx > 0) {
+          parts.push({ type: "text", value: remaining.slice(0, idx) });
+        }
+        const wordEntry = symbolMap[word];
+        if (wordEntry) {
+          parts.push({
+            type: "element",
+            tagName: "a",
+            properties: { href: wordEntry.url, class: "symbol-link" },
+            children: [{ type: "text", value: word }],
+          });
+        } else {
+          parts.push({ type: "text", value: word });
+        }
+        remaining = remaining.slice(idx + word.length);
+      }
+
+      // Only replace children if we actually found any symbols
+      if (parts.some((p) => p.type === "element")) {
+        hast.children = parts;
+      }
     },
   };
 }
 
 function getSpanText(span) {
+  let result = "";
   for (const child of span.children || []) {
-    if (child.type === "text") return child.value;
-    if (child.type === "element") {
-      const text = getSpanText(child);
-      if (text) return text;
-    }
+    if (child.type === "text") result += child.value;
+    else if (child.type === "element") result += getSpanText(child);
   }
-  return "";
+  return result;
 }
 
 function makeHint(paramName) {
