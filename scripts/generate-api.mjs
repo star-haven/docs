@@ -816,10 +816,18 @@ for (const header of headers) {
       typeMap.set(precise, { headerRel: header.rel, symbolName: symName });
     }
     if (symName !== "unknown") {
-      nameMap.set(symName, {
+      const entry = {
         url: headerRelToUrl(header.rel) + "#" + slugify(symName),
         kind: sym.kind?.identifier ?? "",
-      });
+      };
+      if (
+        entry.kind === "c.func" &&
+        isEvtApiCallable(sym)
+      ) {
+        const params = parseEvtParams(sym.docComment);
+        if (params.length > 0) entry.params = params;
+      }
+      nameMap.set(symName, entry);
     }
   }
 }

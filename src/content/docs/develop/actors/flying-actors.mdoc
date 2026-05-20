@@ -27,7 +27,8 @@ Flying actors use different movement functions than ground actors:
 ```c
 // flying movement (in EVS_Idle or EVS_TakeTurn)
 Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
-Call(FlyToGoal, ACTOR_SELF, 0, -4, EASING_LINEAR)
+Call(FlyToGoal,
+    ACTOR_SELF, 0, -4, EASING_LINEAR)
 ```
 
 The third argument to `FlyToGoal` is the arc height (negative = bob downward), and the fourth is the easing function.
@@ -74,7 +75,8 @@ You can toggle the flag at runtime when the actor detaches from the ceiling:
 
 ```c
 // detach from ceiling
-Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, false)
+Call(SetActorFlagBits,
+    ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, false)
 ```
 
 ### Ceiling + spiky

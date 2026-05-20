@@ -68,7 +68,8 @@ EvtScript EVS_Init = {
     Call(BindTakeTurn, ACTOR_SELF, Ref(EVS_TakeTurn))
     Call(BindIdle, ACTOR_SELF, Ref(EVS_Idle))
     Call(BindHandleEvent, ACTOR_SELF, Ref(EVS_HandleEvent))
-    Call(GetActorVar, ACTOR_SELF, AVAR_StartTransparent, LVar0)
+    Call(GetActorVar,
+        ACTOR_SELF, AVAR_StartTransparent, LVar0)
     IfTrue(LVar0)
         Call(SetPartAlpha, ACTOR_SELF, PRT_MAIN, 80)
     EndIf

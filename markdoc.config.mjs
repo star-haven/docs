@@ -3,6 +3,7 @@ import shiki from "@astrojs/markdoc/shiki";
 import {
   symbolAutoLinks,
   symbolAutoLinkTransformer,
+  inlayHintTransformer,
 } from "./scripts/markdoc-symbol-links.mjs";
 
 export default defineMarkdocConfig({
@@ -10,7 +11,7 @@ export default defineMarkdocConfig({
     shiki({
       theme: "catppuccin-mocha",
       wrap: true,
-      transformers: [symbolAutoLinkTransformer()],
+      transformers: [symbolAutoLinkTransformer(), inlayHintTransformer()],
     }),
     symbolAutoLinks(),
   ],

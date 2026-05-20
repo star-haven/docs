@@ -55,6 +55,13 @@ pre .symbol-link {
     border-bottom-color: rgba(255, 255, 255, 0.4);
 }
 
+.inlay-hint {
+    user-select: none;
+    opacity: 0.5;
+    font-size: 0.85em;
+    padding-left: 0.4em;
+}
+
 .intra-doc-link {
     font-family: var(--sl-font-mono, ui-monospace, monospace);
 }

@@ -37,7 +37,8 @@ enum ActorVars {
 EvtScript EVS_TakeTurn = {
     // ...
     Call(SummonEnemy, Ref(CloneFormation), false)
-    Call(SetActorVar, ACTOR_SELF, AVAR_SpawnedActorID, LVar0)
+    Call(SetActorVar,
+        ACTOR_SELF, AVAR_SpawnedActorID, LVar0)
     // ...
 };
 ```
@@ -48,7 +49,8 @@ The simplest approach is to call `SetActorVar` on the summoned actor right after
 
 ```c
 Call(SummonEnemy, Ref(CloneFormation), false)
-Call(SetActorVar, LVar0, 0, true)  // set the summoned actor's var 0
+Call(SetActorVar,
+    LVar0, 0, true)  // set the summoned actor's var 0
 ```
 
 See [Actor Variables](actor-variables) for more on how variables work.
