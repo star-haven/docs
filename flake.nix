@@ -5,10 +5,19 @@
       url = "github:bates64/papermario-dx";
       flake = false;
     };
+    star-rod-classic = {
+      url = "github:z64a/star-rod-classic";
+      flake = false;
+    };
   };
 
   outputs =
-    { nixpkgs, papermario-dx, ... }:
+    {
+      nixpkgs,
+      papermario-dx,
+      star-rod-classic,
+      ...
+    }:
     let
       forAllSystems = nixpkgs.lib.genAttrs [
         "x86_64-linux"
@@ -31,6 +40,7 @@
             npmDepsHash = "sha256-KZr1+XRLdXUXlxakkCuYcjOb2sX4aJz9lmXxxtKAyyo=";
             nativeBuildInputs = [ pkgs.llvmPackages.clang ];
             PAPERMARIO_DX_SRC = papermario-dx;
+            STAR_ROD_CLASSIC_SRC = star-rod-classic;
             installPhase = ''
               cp -r dist $out
             '';
@@ -51,6 +61,7 @@
             ];
             shellHook = ''
               export PAPERMARIO_DX_SRC=''${PAPERMARIO_DX_SRC:-${papermario-dx}}
+              export STAR_ROD_CLASSIC_SRC=''${STAR_ROD_CLASSIC_SRC:-${star-rod-classic}}
             '';
           };
         }

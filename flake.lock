@@ -35,7 +35,24 @@
     "root": {
       "inputs": {
         "nixpkgs": "nixpkgs",
-        "papermario-dx": "papermario-dx"
+        "papermario-dx": "papermario-dx",
+        "star-rod-classic": "star-rod-classic"
+      }
+    },
+    "star-rod-classic": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1787250502,
+        "narHash": "sha256-tYYIC2L9O6FVdAou92wgZnndE3flMs7ipgWpZ7vPyyE=",
+        "owner": "z64a",
+        "repo": "star-rod-classic",
+        "rev": "463becb8bb15fe11da50405188edff3379997ebf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "z64a",
+        "repo": "star-rod-classic",
+        "type": "github"
       }
     }
   },

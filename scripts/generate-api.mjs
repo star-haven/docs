@@ -15,7 +15,7 @@ import { fileURLToPath } from "node:url";
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const projectRoot = join(scriptDir, "..");
 const stubsDir = join(scriptDir, "stubs");
-const outDir = join(projectRoot, "src/content/docs/develop/reference");
+const outDir = join(projectRoot, "src/content/docs/papermario-dx/reference");
 
 const srcRoot = process.env.PAPERMARIO_DX_SRC;
 if (!srcRoot) {
@@ -384,7 +384,7 @@ function kindToClass(kind) {
 }
 
 function headerRelToUrl(headerRel) {
-  return "/develop/reference/" + headerRel.replace(/\.(h|hpp)$/, "");
+  return "/papermario-dx/reference/" + headerRel.replace(/\.(h|hpp)$/, "");
 }
 
 function resolveIntraDocLinks(text, nameMap) {
