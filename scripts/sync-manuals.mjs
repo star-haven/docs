@@ -6,7 +6,7 @@ import {
   rmSync,
   writeFileSync,
 } from "node:fs";
-import { dirname, extname, join, posix, relative } from "node:path";
+import { basename, dirname, extname, join, posix, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
@@ -27,6 +27,9 @@ const MANUALS = [
 
 const PAGE_EXTENSIONS = [".md", ".mdoc"];
 const ASSET_EXTENSIONS = [".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"];
+
+/** Names a sidebar section for starlight-auto-sidebar. */
+const SECTION_METADATA = "_meta.yml";
 
 for (const { env, dest, editBase } of MANUALS) {
   const srcRoot = process.env[env];
@@ -59,14 +62,23 @@ function syncManual(manualDir, destDir, editBase) {
         base: `/${relative(contentDir, destDir)}/`,
       });
       writeFileSync(destFile, withEditUrl(page, editBase + file));
-    } else if (ASSET_EXTENSIONS.includes(extension)) {
+    } else if (
+      ASSET_EXTENSIONS.includes(extension) ||
+      basename(file) === SECTION_METADATA
+    ) {
       cpSync(join(manualDir, file), destFile);
     }
   }
 
+  // Manuals ordered by a README.md get section metadata generated from it. A manual which
+  // names its own sections keeps them.
   for (const [directory, section] of contents.sections) {
+    if (files.includes(posix.join(directory, SECTION_METADATA))) {
+      continue;
+    }
+
     writeFileSync(
-      join(destDir, directory, "_meta.yml"),
+      join(destDir, directory, SECTION_METADATA),
       `label: ${section.label}\norder: ${section.order}\n`,
     );
   }
