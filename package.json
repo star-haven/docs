@@ -2,9 +2,10 @@
   "name": "starhaven-docs",
   "type": "module",
   "scripts": {
+    "sync-manuals": "node scripts/sync-manuals.mjs",
     "generate-api": "node scripts/generate-api.mjs",
-    "dev": "astro dev",
-    "build": "npm run generate-api && astro build",
+    "dev": "npm run sync-manuals && npm run generate-api && astro dev",
+    "build": "npm run sync-manuals && npm run generate-api && astro build",
     "preview": "astro preview"
   },
   "dependencies": {

@@ -5,9 +5,54 @@ import markdoc from "@astrojs/markdoc";
 import sidebar from "starlight-auto-sidebar";
 import llmsTxt from "starlight-llms-txt";
 import catppuccin from "@catppuccin/starlight";
+import { readdirSync } from "node:fs";
+import { join, relative } from "node:path";
+
+const contentDir = "src/content/docs";
+
+/**
+ * The manuals were served from /develop and /classic before they moved out of this
+ * repository. Static hosting has no pattern matching, so every page gets its own redirect.
+ */
+function legacyRedirects(oldPrefix, directory) {
+  const pages = walk(join(contentDir, directory))
+    .filter((file) => /\.mdo?c?$/.test(file))
+    .map((file) =>
+      relative(join(contentDir, directory), file)
+        .replace(/\.mdo?c?$/, "")
+        .replace(/(^|\/)index$/, ""),
+    );
+
+  return Object.fromEntries(
+    pages.map((page) => [
+      `${oldPrefix}/${page}`.replace(/\/$/, ""),
+      `/${directory}/${page}`.replace(/\/$/, ""),
+    ]),
+  );
+}
+
+function walk(directory) {
+  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const path = join(directory, entry.name);
+    return entry.isDirectory() ? walk(path) : [path];
+  });
+}
 
 export default defineConfig({
   site: "https://docs.starhaven.dev",
+  redirects: {
+    ...legacyRedirects("/develop", "papermario-dx"),
+    ...legacyRedirects("/classic", "star-rod-classic"),
+    // The Star Rod Classic introduction was served from the section root before it moved
+    // into its own directory.
+    "/classic/02-paper-mario-engine": "/star-rod-classic/introduction/02-paper-mario-engine",
+    "/classic/03-from-rom-to-project": "/star-rod-classic/introduction/03-from-rom-to-project",
+    "/classic/04-sources-patches-and-symbols":
+      "/star-rod-classic/introduction/04-sources-patches-and-symbols",
+    "/classic/05-editors-and-asset-pipelines":
+      "/star-rod-classic/introduction/05-editors-and-asset-pipelines",
+    "/classic/06-the-modding-cycle": "/star-rod-classic/introduction/06-the-modding-cycle",
+  },
   integrations: [
     starlight({
       title: "Star Haven Documentation",
@@ -33,13 +78,13 @@ export default defineConfig({
         },
         {
           label: "Developing Mods",
-          autogenerate: { directory: "develop" },
+          autogenerate: { directory: "papermario-dx" },
         },
         {
           label: "Star Rod Classic",
           collapsed: true,
           badge: { variant: "caution", text: "Legacy" },
-          autogenerate: { directory: "classic" },
+          autogenerate: { directory: "star-rod-classic" },
         },
       ],
       editLink: {
@@ -77,7 +122,7 @@ export default defineConfig({
     sitemap(),
     markdoc({ allowHTML: true }),
     llmsTxt({
-      exclude: "develop/classic/**",
+      exclude: "star-rod-classic/**",
     }),
   ],
 });
