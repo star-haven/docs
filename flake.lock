@@ -19,11 +19,11 @@
     "papermario-dx": {
       "flake": false,
       "locked": {
-        "lastModified": 1789209882,
-        "narHash": "sha256-VnUWcz2nXcpcetw5hbYmopHKjW+Qd4wHhTAm4wesCNc=",
+        "lastModified": 1789210766,
+        "narHash": "sha256-m6Oqa3rTx8vqvhQw3RJpzxVURN7go2XKr7ouwuB0B/Y=",
         "owner": "bates64",
         "repo": "papermario-dx",
-        "rev": "5999167a9086becf0f91d2ba80a1e3b474ac7bf6",
+        "rev": "e3bf6617a31671cc2756cd44bccab7802f20f6f4",
         "type": "github"
       },
       "original": {
