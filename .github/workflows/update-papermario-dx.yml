@@ -1,7 +1,8 @@
 name: Update papermario-dx
 on:
-  repository_dispatch:
-    types: [update-papermario-dx]
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
 
 jobs:
   update:
@@ -15,13 +16,17 @@ jobs:
       - name: Update papermario-dx input
         run: nix flake update papermario-dx
       - name: Commit and push
+        id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add flake.lock
-          git diff --cached --quiet || (git commit -m "update papermario-dx input" && git push)
+          git diff --cached --quiet && exit 0
+          git commit -m "update papermario-dx input"
+          git push
+          echo "updated=true" >> "$GITHUB_OUTPUT"
       - name: Trigger deploy
-        if: success()
+        if: steps.commit.outputs.updated == 'true'
         uses: actions/github-script@v7
         with:
           script: |
