@@ -1,9 +1,10 @@
 import {
-  cpSync,
+  existsSync,
   mkdirSync,
   readdirSync,
   readFileSync,
   rmSync,
+  watch,
   writeFileSync,
 } from "node:fs";
 import { basename, dirname, extname, join, posix, relative } from "node:path";
@@ -31,18 +32,62 @@ const ASSET_EXTENSIONS = [".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"];
 /** Names a sidebar section for starlight-auto-sidebar. */
 const SECTION_METADATA = "_meta.yml";
 
-for (const { env, dest, editBase } of MANUALS) {
+/**
+ * Replaces each synced manual with a fresh copy of its source, so pages deleted from the
+ * source don't linger.
+ */
+export function syncManuals() {
+  for (const manual of MANUALS) {
+    const { manualDir, destDir } = locate(manual);
+    rmSync(destDir, { recursive: true, force: true });
+    syncManual(manualDir, destDir, manual.editBase);
+    console.log(`synced ${manualDir} -> ${relative(process.cwd(), destDir)}`);
+  }
+}
+
+/**
+ * Re-syncs a manual whenever its source changes. Unchanged pages aren't rewritten, so the
+ * dev server only reloads the pages that were edited.
+ */
+export function watchManuals() {
+  for (const manual of MANUALS) {
+    const { manualDir, destDir } = locate(manual);
+    const deleted = new Set();
+    let timer;
+
+    watch(manualDir, { recursive: true }, (_event, file) => {
+      if (file && !existsSync(join(manualDir, file))) {
+        deleted.add(file);
+      }
+
+      // Editors often save a file in several steps.
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        try {
+          for (const file of deleted) {
+            rmSync(join(destDir, destPath(file)), { recursive: true, force: true });
+          }
+          deleted.clear();
+          syncManual(manualDir, destDir, manual.editBase);
+        } catch (error) {
+          console.error(`couldn't sync ${manualDir}: ${error.message}`);
+        }
+      }, 100);
+    });
+  }
+}
+
+function locate({ env, dest }) {
   const srcRoot = process.env[env];
   if (!srcRoot) {
-    console.error(`${env} is not set`);
-    process.exit(1);
+    throw new Error(`${env} is not set`);
   }
 
-  const manualDir = join(srcRoot, "manual");
-  const destDir = join(contentDir, dest);
-  rmSync(destDir, { recursive: true, force: true });
-  syncManual(manualDir, destDir, editBase);
-  console.log(`synced ${manualDir} -> ${relative(process.cwd(), destDir)}`);
+  return { manualDir: join(srcRoot, "manual"), destDir: join(contentDir, dest) };
+}
+
+function destPath(file) {
+  return file === "README.md" ? "index.md" : file;
 }
 
 function syncManual(manualDir, destDir, editBase) {
@@ -53,7 +98,7 @@ function syncManual(manualDir, destDir, editBase) {
 
   for (const file of files) {
     const extension = extname(file).toLowerCase();
-    const destFile = join(destDir, file === "README.md" ? "index.md" : file);
+    const destFile = join(destDir, destPath(file));
     mkdirSync(dirname(destFile), { recursive: true });
 
     if (PAGE_EXTENSIONS.includes(extension)) {
@@ -61,12 +106,12 @@ function syncManual(manualDir, destDir, editBase) {
         files,
         base: `/${relative(contentDir, destDir)}/`,
       });
-      writeFileSync(destFile, withEditUrl(page, editBase + file));
+      writeIfChanged(destFile, withEditUrl(page, editBase + file));
     } else if (
       ASSET_EXTENSIONS.includes(extension) ||
       basename(file) === SECTION_METADATA
     ) {
-      cpSync(join(manualDir, file), destFile);
+      writeIfChanged(destFile, readFileSync(join(manualDir, file)));
     }
   }
 
@@ -77,11 +122,18 @@ function syncManual(manualDir, destDir, editBase) {
       continue;
     }
 
-    writeFileSync(
+    writeIfChanged(
       join(destDir, directory, SECTION_METADATA),
       `label: ${section.label}\norder: ${section.order}\n`,
     );
   }
+}
+
+function writeIfChanged(file, contents) {
+  if (existsSync(file) && readFileSync(file).equals(Buffer.from(contents))) {
+    return;
+  }
+  writeFileSync(file, contents);
 }
 
 function walk(directory) {
@@ -205,4 +257,13 @@ function yamlString(value) {
   return /^[\w][\w .,'?!()/-]*$/.test(value)
     ? value
     : `"${value.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`;
+}
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  try {
+    syncManuals();
+  } catch (error) {
+    console.error(error.message);
+    process.exit(1);
+  }
 }

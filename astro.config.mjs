@@ -7,6 +7,7 @@ import llmsTxt from "starlight-llms-txt";
 import catppuccin from "@catppuccin/starlight";
 import { readdirSync } from "node:fs";
 import { join, relative } from "node:path";
+import { watchManuals } from "./scripts/sync-manuals.mjs";
 
 const contentDir = "src/content/docs";
 
@@ -37,6 +38,14 @@ function walk(directory) {
     return entry.isDirectory() ? walk(path) : [path];
   });
 }
+
+/** Keeps the synced manuals up to date while the dev server runs. */
+const manualWatcher = {
+  name: "manual-watcher",
+  hooks: {
+    "astro:server:setup": () => watchManuals(),
+  },
+};
 
 export default defineConfig({
   site: "https://docs.starhaven.dev",
@@ -124,5 +133,6 @@ export default defineConfig({
     llmsTxt({
       exclude: "star-rod-classic/**",
     }),
+    manualWatcher,
   ],
 });

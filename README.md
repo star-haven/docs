@@ -17,7 +17,18 @@ Most pages come from the manuals in the projects they document, and are synced i
 | [Developing Mods](https://docs.starhaven.dev/papermario-dx/) | [`manual/`](https://github.com/bates64/papermario-dx/tree/main/manual) in papermario-dx |
 | [Star Rod Classic](https://docs.starhaven.dev/star-rod-classic/) | [`manual/`](https://github.com/z64a/star-rod-classic/tree/main/manual) in star-rod-classic |
 
-Edit those pages in their own repository — a copy in `src/content/docs/` is overwritten on the next build. This repository owns the home page, the [Playing Mods](https://docs.starhaven.dev/play/) page, and the site itself.
+Edit those pages in their own repository — a copy in `src/content/docs/` is overwritten on the next build.
+
+To preview changes to a manual, point its environment variable at your checkout. The dev server reloads pages as you edit them:
+
+```shell
+PAPERMARIO_DX_SRC=~/papermario-dx nix develop --command npm run dev
+STAR_ROD_CLASSIC_SRC=~/star-rod-classic nix develop --command npm run dev
+```
+
+Avoid `nix develop --override-input` for this: it copies the whole repository into the Nix store every time a file changes.
+
+Changes to papermario-dx headers need a dev server restart to regenerate the API reference.
 
 ## Writing style
 
