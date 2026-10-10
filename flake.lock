@@ -42,11 +42,11 @@
     "star-rod-classic": {
       "flake": false,
       "locked": {
-        "lastModified": 1787250502,
-        "narHash": "sha256-tYYIC2L9O6FVdAou92wgZnndE3flMs7ipgWpZ7vPyyE=",
+        "lastModified": 1791593600,
+        "narHash": "sha256-vuiWVh6uH8vbBI36Hbag53yz7n++ulmO/qopo65rYZM=",
         "owner": "z64a",
         "repo": "star-rod-classic",
-        "rev": "463becb8bb15fe11da50405188edff3379997ebf",
+        "rev": "b96aa4ac203b55f156d0f73ac2cbd5d24304e239",
         "type": "github"
       },
       "original": {
