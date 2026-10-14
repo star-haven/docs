@@ -3,5 +3,6 @@ dist/
 .astro/
 /result
 src/content/docs/papermario-dx/
+src/content/docs/develop/reference/
 src/content/docs/star-rod-classic/
 src/data/symbol-map.json
