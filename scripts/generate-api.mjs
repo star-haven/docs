@@ -24,9 +24,8 @@ if (!srcRoot) {
 }
 
 const headerRoot = join(srcRoot, "src");
-const GITHUB_REPO_BASE =
-  "https://github.com/bates64/papermario-dx/blob/main";
-const GITHUB_BASE = `${GITHUB_REPO_BASE}/src`;
+const REPO_BASE = "https://tangled.org/starhaven.dev/papermario-dx/blob/main";
+const SRC_BASE = `${REPO_BASE}/src`;
 
 const RENDER_UNDOCUMENTED = true;
 const RENDER_UNDOCUMENTED_MACROS = false;
@@ -691,11 +690,11 @@ function generateMarkdown(header, data, typeMap, nameMap, funcDefMap) {
     const def = kind === "c.func" ? funcDefMap.get(name) : null;
     let sourceUrl;
     if (def) {
-      sourceUrl = `${GITHUB_REPO_BASE}/${def.file}#L${def.line}`;
+      sourceUrl = `${REPO_BASE}/${def.file}#L${def.line}`;
     } else {
       const line = sym.location?.position?.line;
       sourceUrl =
-        line != null ? `${GITHUB_BASE}/${header.rel}#L${line + 1}` : null;
+        line != null ? `${SRC_BASE}/${header.rel}#L${line + 1}` : null;
     }
     const sourceAttr = sourceUrl ? ` source="${sourceUrl}"` : "";
     parts.push(`#### ${escapeForMarkdown(tocName)} {% #${tocName} %}`);
@@ -776,7 +775,7 @@ function generateMarkdown(header, data, typeMap, nameMap, funcDefMap) {
     const heading = `<span class="api-sig"><span class="type">${escapeHtml(gvar.type)}</span> <span class="function">${escapeHtml(gvar.name)}</span></span>`;
     const headingAttr = heading.replace(/"/g, "&quot;").replace(/\n/g, "&#10;");
     const sourceLine = gvar.line + 1;
-    const sourceUrl = `${GITHUB_BASE}/${header.rel}#L${sourceLine}`;
+    const sourceUrl = `${SRC_BASE}/${header.rel}#L${sourceLine}`;
     parts.push(`### ${escapeForMarkdown(gvar.name)}`);
     parts.push("");
     parts.push(`{% apiitem heading="${headingAttr}" source="${sourceUrl}" %}`);

@@ -2,7 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     papermario-dx = {
-      url = "github:bates64/papermario-dx";
+      url = "git+https://knot.starhaven.dev/did:plc:dfsxnyhzxwqpmykryrjtjabz?ref=main&shallow=1";
       flake = false;
     };
     star-rod-classic = {

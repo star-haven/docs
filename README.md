@@ -14,7 +14,7 @@ Most pages come from the manuals in the projects they document, and are synced i
 
 | Section | Source |
 | --- | --- |
-| [Developing Mods](https://docs.starhaven.dev/papermario-dx/) | [`manual/`](https://github.com/bates64/papermario-dx/tree/main/manual) in papermario-dx |
+| [Developing Mods](https://docs.starhaven.dev/papermario-dx/) | [`manual/`](https://tangled.org/starhaven.dev/papermario-dx/tree/main/manual) in papermario-dx |
 | [Star Rod Classic](https://docs.starhaven.dev/star-rod-classic/) | [`manual/`](https://github.com/z64a/star-rod-classic/tree/main/manual) in star-rod-classic |
 
 Edit those pages in their own repository — a copy in `src/content/docs/` is overwritten on the next build.

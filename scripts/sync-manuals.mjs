@@ -17,7 +17,7 @@ const MANUALS = [
   {
     env: "PAPERMARIO_DX_SRC",
     dest: "papermario-dx",
-    editBase: "https://github.com/bates64/papermario-dx/edit/main/manual/",
+    editBase: "https://tangled.org/starhaven.dev/papermario-dx/blob/main/manual/",
   },
   {
     env: "STAR_ROD_CLASSIC_SRC",
