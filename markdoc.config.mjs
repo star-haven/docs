@@ -1,6 +1,7 @@
 import { defineMarkdocConfig, component } from "@astrojs/markdoc/config";
 import Markdoc from "@markdoc/markdoc";
 import shiki from "@astrojs/markdoc/shiki";
+import { transformerNotationDiff } from "@shikijs/transformers";
 import {
   symbolAutoLinks,
   symbolAutoLinkTransformer,
@@ -12,7 +13,11 @@ export default defineMarkdocConfig({
     shiki({
       theme: "catppuccin-mocha",
       wrap: true,
-      transformers: [symbolAutoLinkTransformer(), inlayHintTransformer()],
+      transformers: [
+        transformerNotationDiff(),
+        symbolAutoLinkTransformer(),
+        inlayHintTransformer(),
+      ],
     }),
     symbolAutoLinks(),
   ],

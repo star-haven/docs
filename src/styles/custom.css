@@ -143,3 +143,10 @@ h5.enum-value:target {
         animation: 0.65s cubic-bezier(0, 0, 0.1, 1) 0.1s api-target-fadein;
     }
 }
+
+pre .line.diff.add {
+    display: inline-block;
+    width: 100%;
+    background-color: rgba(166, 227, 161, 0.15); /* catppuccin mocha green */
+    box-shadow: inset 3px 0 0 #a6e3a1;
+}

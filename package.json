@@ -13,6 +13,7 @@
     "@astrojs/sitemap": "^3.7.0",
     "@astrojs/starlight": "^0.37.7",
     "@catppuccin/starlight": "^1.1.1",
+    "@shikijs/transformers": "^3.23.0",
     "astro": "^5.18.0",
     "sharp": "^0.33.0",
     "starlight-auto-sidebar": "^0.1.4",
