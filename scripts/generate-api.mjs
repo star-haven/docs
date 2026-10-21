@@ -734,8 +734,15 @@ function generateMarkdown(header, data, typeMap, nameMap, funcDefMap) {
         );
         const typeHtml = renderFragments(typeFrags, typeMap).trim();
         const fieldDoc = parseDocComment(field.docComment);
-        const fieldDocHtml = fieldDoc
-          ? `<span class="field-doc">${resolveIntraDocLinks(escapeForMarkdown(fieldDoc), nameMap)}</span>`
+        // The field sits on one line of HTML, so a blank line in its comment
+        // would end the paragraph inside the span.
+        const fieldDocText = fieldDoc
+          ?.trim()
+          .split(/\n\s*\n/)
+          .map((paragraph) => escapeForMarkdown(paragraph.replace(/\s*\n\s*/g, " ").trim()))
+          .join("<br><br>");
+        const fieldDocHtml = fieldDocText
+          ? `<span class="field-doc">${resolveIntraDocLinks(fieldDocText, nameMap)}</span>`
           : "";
         const safeTypeHtml = typeHtml.replace(/\*/g, "&#42;");
         parts.push(
