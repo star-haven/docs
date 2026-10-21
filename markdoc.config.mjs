@@ -1,4 +1,5 @@
 import { defineMarkdocConfig, component } from "@astrojs/markdoc/config";
+import Markdoc from "@markdoc/markdoc";
 import shiki from "@astrojs/markdoc/shiki";
 import {
   symbolAutoLinks,
@@ -15,6 +16,20 @@ export default defineMarkdocConfig({
     }),
     symbolAutoLinks(),
   ],
+  nodes: {
+    // Markdoc's list doesn't wait for its items, so a code block in a list item,
+    // which Shiki highlights asynchronously, would leave the list with no children.
+    list: {
+      ...Markdoc.nodes.list,
+      async transform(node, config) {
+        return new Markdoc.Tag(
+          node.attributes.ordered ? "ol" : "ul",
+          node.transformAttributes(config),
+          await node.transformChildren(config),
+        );
+      },
+    },
+  },
   tags: {
     apiitem: {
       render: component("./src/components/ApiItem.astro"),
