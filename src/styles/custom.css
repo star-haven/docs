@@ -1,4 +1,57 @@
+/* The same fonts as Diorama64. Instrument Sans is variable, with every weight and width. */
+@font-face {
+    font-family: "Instrument Sans";
+    src: url("/fonts/InstrumentSans.woff2") format("woff2");
+    font-weight: 400 700;
+    font-stretch: 75% 100%;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Instrument Sans";
+    src: url("/fonts/InstrumentSans-Italic.woff2") format("woff2");
+    font-weight: 400 700;
+    font-stretch: 75% 100%;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Fantasque Sans Mono";
+    src: url("/fonts/FantasqueSansMono-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Fantasque Sans Mono";
+    src: url("/fonts/FantasqueSansMono-Italic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Fantasque Sans Mono";
+    src: url("/fonts/FantasqueSansMono-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Fantasque Sans Mono";
+    src: url("/fonts/FantasqueSansMono-BoldItalic.woff2") format("woff2");
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
 :root {
+    --sl-font: "Instrument Sans", system-ui, sans-serif;
+    --sl-font-mono: "Fantasque Sans Mono", ui-monospace, monospace;
     --sl-text-h1: 1.75rem;
     --sl-text-h2: 1.4rem;
     --sl-text-h3: 1.15rem;
@@ -33,6 +86,11 @@
 
 .keyword {
     color: #cba6f7; /* catppuccin mocha mauve - keywords */
+}
+
+code {
+    /* As in Diorama64's editor. */
+    font-feature-settings: "ss01";
 }
 
 :not(pre) > code {
