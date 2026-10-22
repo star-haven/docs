@@ -383,8 +383,10 @@ function kindToClass(kind) {
   return "type";
 }
 
+// Astro lowercases the paths of the pages it builds, such as
+// world/common/npc/Toad/wander.mdoc becoming .../npc/toad/wander.
 function headerRelToUrl(headerRel) {
-  return "/papermario-dx/reference/" + headerRel.replace(/\.(h|hpp)$/, "");
+  return "/papermario-dx/reference/" + headerRel.replace(/\.(h|hpp)$/, "").toLowerCase();
 }
 
 function resolveIntraDocLinks(text, nameMap) {
