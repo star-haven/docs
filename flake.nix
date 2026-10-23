@@ -37,7 +37,7 @@
             pname = "starhaven-docs";
             version = "0.0.0";
             src = ./.;
-            npmDepsHash = "sha256-KZr1+XRLdXUXlxakkCuYcjOb2sX4aJz9lmXxxtKAyyo=";
+            npmDepsHash = "sha256-0vauL7Lt2XLAh/LLV5NKA44mZYjZjFexQZPxiOQgTWg=";
             nativeBuildInputs = [ pkgs.llvmPackages.clang ];
             PAPERMARIO_DX_SRC = papermario-dx;
             STAR_ROD_CLASSIC_SRC = star-rod-classic;
