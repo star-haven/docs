@@ -19,10 +19,10 @@
     "papermario-dx": {
       "flake": false,
       "locked": {
-        "lastModified": 1792859766,
-        "narHash": "sha256-GJxX6gP0EpDxtE3fTp3JU8ecWUzpsf7li85PcB3Wt+M=",
+        "lastModified": 1792971810,
+        "narHash": "sha256-kV+rJIX30NzxEdVKDnwdNOzZMGWBGzsrQJUweTZpQHU=",
         "ref": "main",
-        "rev": "fd98b59f24895ff52000614abad7236371277973",
+        "rev": "6bb371cd877785a6596a0f076ac327069f5fd454",
         "shallow": true,
         "type": "git",
         "url": "https://knot.starhaven.dev/did:plc:dfsxnyhzxwqpmykryrjtjabz"
